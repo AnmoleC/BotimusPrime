@@ -3,6 +3,8 @@ package botimusprime.botimusprime;
 import java.util.HashMap;
 import java.util.Map;
 
+import botimusprime.botimusprime.commands.Command;
+import botimusprime.botimusprime.commands.PongCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -15,9 +17,7 @@ public class App
 {
 	private static final Map<String, Command> commands = new HashMap<>();
 	static {
-	    commands.put("ping", event -> event.getMessage()
-	        .getChannel().block()
-	        .createMessage("Pong!").block());
+	    commands.put("ping", event -> new PongCommand(event));
 	}
 	
     public static void main( String[] args )

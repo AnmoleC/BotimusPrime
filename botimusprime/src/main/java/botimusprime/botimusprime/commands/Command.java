@@ -1,4 +1,4 @@
-package botimusprime.botimusprime;
+package botimusprime.botimusprime.commands;
 
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
