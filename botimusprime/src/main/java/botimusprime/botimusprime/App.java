@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import botimusprime.botimusprime.commands.Command;
+import botimusprime.botimusprime.commands.EchoCommand;
 import botimusprime.botimusprime.commands.PongCommand;
+import botimusprime.botimusprime.commands.RemindMeCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -16,8 +18,15 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class App 
 {
 	private static final Map<String, Command> commands = new HashMap<>();
+	
+	private static PongCommand pong = new PongCommand();
+	private static RemindMeCommand remindMe = new RemindMeCommand();
+	private static EchoCommand echo = new EchoCommand();
+
 	static {
-	    commands.put("ping", event -> new PongCommand(event));
+	    commands.put("ping", event -> pong.execute(event));
+	    commands.put("remindme", event -> remindMe.execute(event));
+	    commands.put("echo", event -> echo.execute(event));
 	}
 	
     public static void main( String[] args )
@@ -42,6 +51,6 @@ public class App
         
         client.login().block();
         
-        
+
     }
 }
