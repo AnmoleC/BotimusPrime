@@ -7,17 +7,17 @@ public class EchoCommand implements Command {
 	@Override
 	public void execute(MessageCreateEvent event) {
 		System.out.println(event.getMessage().getContent());
-//		event.getMessage().getUserMentions()
-		
-//		String[] args = event.getMessage().getContent().toString().split(" ");
 
-//		System.out.println("ARGS:" + args.length);
-//		if(args.length >= 1) System.out.println("COMMAND:" + args[0]);
-//		if(args.length >= 2) System.out.println("USER:" + args[1]);
-//		if(args.length >= 3) System.out.println("REPEATS:" + args[2]);
+		String content = event.getMessage().getContent().toString();
+		String[] arguments = content.substring(content.indexOf('!'), content.length()-1).split(" ");
+		int repeats = Integer.parseInt(arguments[arguments.length-1]);
+		String username = arguments[1];
 		
-		
-		
+		for (int i = 0; i < repeats; i++) {			
+			event.getMessage()
+	        .getChannel().block()
+	        .createMessage(username).block();
+		}
 	}
 
 }
