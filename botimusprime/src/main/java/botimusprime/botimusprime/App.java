@@ -18,15 +18,11 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class App 
 {
 	private static final Map<String, Command> commands = new HashMap<>();
-	
-	private static PongCommand pong = new PongCommand();
-	private static RemindMeCommand remindMe = new RemindMeCommand();
-	private static EchoCommand echo = new EchoCommand();
 
 	static {
-	    commands.put("ping", event -> pong.execute(event));
-	    commands.put("remindme", event -> remindMe.execute(event));
-	    commands.put("echo", event -> echo.execute(event));
+	    commands.put("ping" , new PongCommand());
+	    commands.put("remindme", new RemindMeCommand());
+	    commands.put("echo", new EchoCommand());
 	}
 	
     public static void main( String[] args )
@@ -50,7 +46,5 @@ public class App
         });
         
         client.login().block();
-        
-
     }
 }
