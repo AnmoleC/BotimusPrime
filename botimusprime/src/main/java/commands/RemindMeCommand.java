@@ -10,11 +10,14 @@ import java.util.List;
 import app.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
+import util.ReminderManager;
+import util.beans.ReminderBean;
 
 public class RemindMeCommand implements Command {
 	private static final String parseErrMessage = "Invalid time format. Please specify a wait time in the format <Hours:minutes>";
 	private static final String invalidArgsMessage = "Invalid call. Please use the command as follows \n"
 														+ App.BOT_PREFIX + "remindme <waitTime>";
+	private static ReminderManager manager = ReminderManager.getInstance();	
 	
 	@Override
 	public void execute(MessageCreateEvent event) {
@@ -30,20 +33,14 @@ public class RemindMeCommand implements Command {
 		
 		DateFormat dateformat = new SimpleDateFormat("HH:mm");
 		try {
-			Date reference = dateformat.parse("00:00:00");
 			Date wake = dateformat.parse(args.get(1));
-			long miliseconds = wake.getTime() - reference.getTime();
-//			System.out.println(miliseconds);
-			
-			Thread.sleep(miliseconds);
+			Date zeroPoint = dateformat.parse("00:00:00");
+			Date now = new Date();
 
-			channel.createMessage("<@"+username+">").block();
+			ReminderBean reminder = new ReminderBean(channel, "<@"+username+">", new Date(wake.getTime() - zeroPoint.getTime() + now.getTime()));
+			manager.addReminder(reminder);
 		} catch (ParseException e1) {
-//			e1.printStackTrace();
 			channel.createMessage(parseErrMessage).block();
-			
-		} catch (InterruptedException e2) {
-			e2.printStackTrace();
 		}
 		
 		

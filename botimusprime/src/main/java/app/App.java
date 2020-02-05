@@ -10,6 +10,8 @@ import commands.RemindMeCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
+import util.ReminderManager;
+import util.ReminderService;
 
 /**
  * Hello world!
@@ -18,16 +20,19 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class App 
 {
 	private static final Map<String, Command> commands = new HashMap<>();
-	public static final String BOT_PREFIX = "!";
+	public static final char BOT_PREFIX = '!';
 	
 	static {
 	    commands.put("ping" , new PongCommand());
 	    commands.put("remindme", new RemindMeCommand());
 	    commands.put("echo", new EchoCommand());
+	    
+	    ReminderService.getInstance();
+	    ReminderManager.getInstance();
 	}
 	
     public static void main( String[] args )
-    {
+    {	
         System.out.println( "Hello World!" );
         final DiscordClient client = new DiscordClientBuilder(args[0]).build();
         
@@ -38,7 +43,6 @@ public class App
         .subscribe(event -> {
             final String content = event.getMessage().getContent().orElse("");
             for (final Map.Entry<String, Command> entry : commands.entrySet()) {
-                // We will be using ! as our "prefix" to any command in the system.
                 if (content.startsWith(BOT_PREFIX + entry.getKey())) {
                     entry.getValue().execute(event);
                     break;
