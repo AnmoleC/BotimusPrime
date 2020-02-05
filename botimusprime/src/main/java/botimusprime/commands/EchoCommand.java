@@ -1,9 +1,9 @@
-package botimusprime.botimusprime.commands;
+package botimusprime.commands;
 
 import java.util.Arrays;
 import java.util.List;
 
-import botimusprime.botimusprime.App;
+import botimusprime.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
 
