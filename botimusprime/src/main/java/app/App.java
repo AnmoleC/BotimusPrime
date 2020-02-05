@@ -6,6 +6,7 @@ import java.util.Map;
 import commands.Command;
 import commands.EchoCommand;
 import commands.PongCommand;
+import commands.PostImageCommand;
 import commands.RemindMeCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
@@ -26,6 +27,7 @@ public class App
 	    commands.put("ping" , new PongCommand());
 	    commands.put("remindme", new RemindMeCommand());
 	    commands.put("echo", new EchoCommand());
+	    commands.put("post", new PostImageCommand());
 	    
 	    ReminderService.getInstance();
 	    ReminderManager.getInstance();
