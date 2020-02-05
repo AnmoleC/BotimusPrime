@@ -1,12 +1,12 @@
-package botimusprime;
+package app;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import botimusprime.commands.Command;
-import botimusprime.commands.EchoCommand;
-import botimusprime.commands.PongCommand;
-import botimusprime.commands.RemindMeCommand;
+import commands.Command;
+import commands.EchoCommand;
+import commands.PongCommand;
+import commands.RemindMeCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
