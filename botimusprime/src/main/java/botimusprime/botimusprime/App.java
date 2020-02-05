@@ -18,7 +18,8 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class App 
 {
 	private static final Map<String, Command> commands = new HashMap<>();
-
+	public static final String BOT_PREFIX = "!";
+	
 	static {
 	    commands.put("ping" , new PongCommand());
 	    commands.put("remindme", new RemindMeCommand());
@@ -38,7 +39,7 @@ public class App
             final String content = event.getMessage().getContent().orElse("");
             for (final Map.Entry<String, Command> entry : commands.entrySet()) {
                 // We will be using ! as our "prefix" to any command in the system.
-                if (content.startsWith('!' + entry.getKey())) {
+                if (content.startsWith(BOT_PREFIX + entry.getKey())) {
                     entry.getValue().execute(event);
                     break;
                 }
