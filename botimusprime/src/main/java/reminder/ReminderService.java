@@ -8,6 +8,7 @@ public class ReminderService implements Runnable{
 	private static ReminderService service;
 	private static ReminderManager manager = ReminderManager.getInstance();
 	private static int UPDATE = 60000;
+	
 	private ReminderService() {
 		super();
 	}

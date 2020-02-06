@@ -11,13 +11,18 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ImageJSONParser {
+public class ImageJSONReader {
 	private static Map<String, String> images = new HashMap<>();
 	
-	public static Map<String, String> parse(){
-		try {
-			String imageFilePath = System.getProperty("user.dir") + "\\resources\\images.json";
-			Object imageObj = new JSONParser().parse( new FileReader(imageFilePath));
+	public ImageJSONReader() {
+		super();
+		parse();
+	}
+	
+	public static void parse(){
+		String imageFilePath = System.getProperty("user.dir") + "\\resources\\images.json";
+		try(FileReader reader = new FileReader(imageFilePath)) {
+			Object imageObj = new JSONParser().parse( reader );
 			JSONObject imageJO = (JSONObject) imageObj;
 			JSONArray imageJA = (JSONArray)imageJO.get("images");
 			Iterator<?> itr = imageJA.iterator();
@@ -35,7 +40,12 @@ public class ImageJSONParser {
 			System.out.println("Failed to reload image map. File not found");
 		}
 		
-		return images;
+	}
+
+	public static Map<String, String> getImages(){
+		if (images.size() == 0) 
+			parse();
+		return new HashMap<>(images);
 	}
 	
 }
