@@ -27,5 +27,14 @@ public class ReminderBean {
 	public Date getDate() {
 		return date;
 	}
+
+	public String toLongString() {
+		return "ReminderBean [channel=" + channel.getId() + ", message=" + message + ", date=" + date + "]";
+	}
+
+	@Override
+	public String toString() {
+		return "ReminderBean [message=" + message + ", date=" + date + "]";
+	}
 	
 }

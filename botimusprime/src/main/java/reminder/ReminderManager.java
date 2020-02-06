@@ -30,7 +30,7 @@ public class ReminderManager {
 	public void printReminder(ReminderBean r){
 		if(!reminders.contains(r)) 
 			return;
-		r.getChannel().createMessage(r.getMessage()).block();
+		r.getChannel().createMessage(r.getDate() + "\n" + r.getMessage()).block();
 		reminders.remove(r);
 	}
 	
