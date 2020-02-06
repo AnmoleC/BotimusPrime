@@ -11,6 +11,7 @@ import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import image.AddImageCommand;
 import image.PostImageCommand;
+import pso2.EQManager;
 import reminder.RemindMeCommand;
 import reminder.ReminderManager;
 import reminder.ReminderService;
@@ -38,7 +39,18 @@ public class App
     public static void main( String[] args )
     {	
         System.out.println( "Hello World!" );
+        
+        if (args.length != 2){
+        	System.out.println("Please run with the following 2 arguments in the following order\n"
+        			+ "DiscordBot Token"
+        			+ "Google Calendar API key"
+        			);
+        	
+        	return;
+        }
+        
         final DiscordClient client = new DiscordClientBuilder(args[0]).build();
+        EQManager.getInstance(args[1]);
         
         client.getEventDispatcher().on(MessageCreateEvent.class)
         // subscribe is like block, in that it will *request* for action
