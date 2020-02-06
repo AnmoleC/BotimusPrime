@@ -3,16 +3,16 @@ package app;
 import java.util.HashMap;
 import java.util.Map;
 
-import commands.Command;
-import commands.EchoCommand;
-import commands.PongCommand;
-import commands.PostImageCommand;
-import commands.RemindMeCommand;
+import basicCommands.Command;
+import basicCommands.EchoCommand;
+import basicCommands.PongCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import util.ReminderManager;
-import util.ReminderService;
+import image.PostImageCommand;
+import reminder.RemindMeCommand;
+import reminder.ReminderManager;
+import reminder.ReminderService;
 
 /**
  * Hello world!

@@ -1,4 +1,4 @@
-package util;
+package image;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class ImageJSONParser {
 		try {
 			String imageFilePath = System.getProperty("user.dir") + "\\resources\\images.json";
 			Object imageObj = new JSONParser().parse( new FileReader(imageFilePath));
-			JSONObject imageJO = (JSONObject) imageObj;			
+			JSONObject imageJO = (JSONObject) imageObj;
 			JSONArray imageJA = (JSONArray)imageJO.get("images");
 			Iterator<?> itr = imageJA.iterator();
 			images.clear();
@@ -27,7 +27,7 @@ public class ImageJSONParser {
 				JSONObject item = (JSONObject)itr.next();
 				String key = (String)item.get("command");
 				String value = (String)item.get("link");
-				images.put(key, value);				
+				images.put(key, value);
 			}
 			
 		} catch (IOException | ParseException e) {

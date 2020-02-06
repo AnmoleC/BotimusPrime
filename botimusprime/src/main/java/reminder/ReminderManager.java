@@ -1,9 +1,7 @@
-package util;
+package reminder;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import util.beans.ReminderBean;
 
 public class ReminderManager {
 

@@ -1,4 +1,4 @@
-package util.beans;
+package reminder;
 
 import java.util.Date;
 

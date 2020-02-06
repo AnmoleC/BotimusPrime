@@ -1,9 +1,7 @@
-package util;
+package reminder;
 
 import java.util.Date;
 import java.util.List;
-
-import util.beans.ReminderBean;
 
 public class ReminderService implements Runnable{
 

@@ -1,4 +1,4 @@
-package commands;
+package reminder;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,10 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 import app.App;
+import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
-import util.ReminderManager;
-import util.beans.ReminderBean;
 
 public class RemindMeCommand implements Command {
 	private static final String parseErrMessage = "Invalid time format. Please specify a wait time in the format <Hours:minutes>";

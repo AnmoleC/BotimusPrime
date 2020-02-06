@@ -1,4 +1,4 @@
-package commands;
+package basicCommands;
 
 import java.util.Arrays;
 import java.util.List;
