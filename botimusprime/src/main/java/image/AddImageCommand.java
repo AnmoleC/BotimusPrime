@@ -26,7 +26,7 @@ public class AddImageCommand implements Command {
 		String name = args.get(1);
 		String link = args.get(2);
 		
-		ImageJSONReader.addImage(name, link);
+		ImageManager.addImage(name, link);
 		channel.createMessage(link).block();
 	}
 

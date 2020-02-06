@@ -13,10 +13,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class ImageJSONReader {
+public class ImageManager {
 	private static Map<String, String> images = new HashMap<>();
 	private static String imageFilePath = System.getProperty("user.dir") + "\\resources\\images.json";
-	public ImageJSONReader() {
+	public ImageManager() {
 		super();
 		parse();
 	}

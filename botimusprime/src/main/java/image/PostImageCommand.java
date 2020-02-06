@@ -25,7 +25,7 @@ public class PostImageCommand implements Command {
 		}
 		
 		String name = args.get(1);
-		Map<String, String> images = ImageJSONReader.getImages();
+		Map<String, String> images = ImageManager.getImages();
 		
 		for (String key : images.keySet()) {
 			if(key.equals(name))
