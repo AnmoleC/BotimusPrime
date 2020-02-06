@@ -27,7 +27,7 @@ public class App
 	    commands.put("ping" , new PongCommand());
 	    commands.put("remindme", new RemindMeCommand());
 	    commands.put("echo", new EchoCommand());
-	    commands.put("post", new PostImageCommand());
+	    commands.put("image", new PostImageCommand());
 	    
 	    ReminderService.getInstance();
 	    ReminderManager.getInstance();

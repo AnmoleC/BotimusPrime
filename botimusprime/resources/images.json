@@ -1,3 +1,5 @@
-{ 
-	"Kurisu":"https://i.ytimg.com/vi/nWiyBhlVOGU/maxresdefault.jpg"
+{	"images":[
+		{"command":"kurisu", "link":"https://i.ytimg.com/vi/nWiyBhlVOGU/maxresdefault.jpg"},
+		{"command":"nani", "link":"https://tenor.com/view/steve-harvey-shocked-terkejut-kaget-suprised-gif-12174657"}
+	]
 }
