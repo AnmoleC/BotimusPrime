@@ -9,6 +9,7 @@ import basicCommands.PongCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
+import image.AddImageCommand;
 import image.PostImageCommand;
 import reminder.RemindMeCommand;
 import reminder.ReminderManager;
@@ -28,6 +29,7 @@ public class App
 	    commands.put("remindme", new RemindMeCommand());
 	    commands.put("echo", new EchoCommand());
 	    commands.put("image", new PostImageCommand());
+	    commands.put("addImage", new AddImageCommand());
 	    
 	    ReminderService.getInstance();
 	    ReminderManager.getInstance();
