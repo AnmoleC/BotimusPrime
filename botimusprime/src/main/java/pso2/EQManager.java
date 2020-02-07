@@ -1,45 +1,48 @@
 package pso2;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.simple.parser.ParseException;
 
 public class EQManager {
-	private static EQManager eqm;
-	private static String fetchURL = "https://www.googleapis.com/calendar/v3/calendars/{$calendar}/events?key={$key}&timeMin={$date}T00:00:00-05:00&singleEvents=true&orderBy=startTime";
-	private static String calendarID = "pso2emgquest@gmail.com";
-	private String API_key;
+	private static CalendarBean calendar;
 	
-	private EQManager(String API_key) {
-		super();
-		this.API_key = API_key;
+	public static void initialize(String API_key){
+		EQRequestBuilder.setKey(API_key);
+		fetchEQData();
 	}
 	
-	public static EQManager getInstance(String key){
-		if (eqm == null){
-			eqm = new EQManager(key);
+	private static void fetchEQData(){
+		String url = EQRequestBuilder.getURL();
+		HttpGet request = new HttpGet(url);
+		
+		try(CloseableHttpClient httpClient = HttpClients.createDefault();
+			CloseableHttpResponse response = httpClient.execute(request)){
+			
+			System.out.println(response.getStatusLine().toString());
+			
+			HttpEntity entity = response.getEntity();
+			if (entity != null){
+				String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+				
+				calendar = new CalendarBean(json);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		return eqm;
 	}
 	
-	public static EQManager getInstance(){
-		if(eqm == null){
-			throw new IllegalArgumentException("EQManager was not instantiated with a Google Calendar API Key");
-		}
-		return eqm;
-	}
-	
-	public String getURL(){
-		Date today = new Date();		
-		return getURL(today);
-	}
-	
-	public String getURL(Date date){
-		String result = fetchURL;
-		result = result.replaceFirst("\\{\\$calendar\\}", calendarID);
-		result = result.replaceFirst("\\{\\$key\\}", API_key);
-		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");		
-		result = result.replaceFirst("\\{\\$date\\}", dateformat.format(date));
-		return result;
+	public static List<EQBean> getEQList(){
+		return calendar.getEQs();
 	}
 }
