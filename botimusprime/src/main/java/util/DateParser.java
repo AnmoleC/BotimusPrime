@@ -5,14 +5,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.api.client.util.DateTime;
+
 public class DateParser {
 	
 	@SuppressWarnings("deprecation")
 	public static Date parse(String input) throws ParseException{
-		System.out.println("input:"+input+":");
+//		System.out.println("input:"+input+":");
 		
 		if(input.matches("[\\d]?[\\d]:[\\d]?[\\d]")){
-			System.out.println("Basic");
+//			System.out.println("Basic");
 			DateFormat dateformat = new SimpleDateFormat("HH:mm");
 			
 			Date inputDate = dateformat.parse(input);
@@ -21,6 +23,7 @@ public class DateParser {
 			return new Date(inputDate.getTime() - zeroPoint.getTime() + now.getTime());
 				
 		}else if(input.matches("[a-zA-Z]+ [\\d]?[\\d]:[\\d]?[\\d]")){
+//			System.out.println("Fancy");
 			DateFormat dateformat = new SimpleDateFormat("EEE HH:mm");
 			Date inputDate = dateformat.parse(input);
 			Date zeroPoint = dateformat.parse("Thursday 00:00");
@@ -30,7 +33,11 @@ public class DateParser {
 			now.setSeconds(0);
 			Date reminderTime = new Date(inputDate.getTime() - zeroPoint.getTime() + now.getTime());
 			return reminderTime;
-		}		
+		}else if (input.matches("[\\d]{4}-[\\d]{2}-[\\d]{2}T[\\d]{2}:[\\d]{2}:[\\d]{2}\\+09:00")){
+//			System.out.println("Google");
+			DateTime dateTime = DateTime.parseRfc3339(input);
+			return new Date(dateTime.getValue());
+		}
 
 		return null;
 	}

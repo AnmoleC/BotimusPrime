@@ -13,10 +13,10 @@ public class EQCommands implements Command {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		channel.createMessage("PSO2 EQ!").block();
 		List<EQBean> EQlist = EQManager.getEQList();
-		
-		for (EQBean EQ : EQlist) {
-			channel.createMessage(EQ.getname() + "\n" + EQ.getStartTime()).block();
-		}
+		channel.createMessage(EQlist.get(0).getname() + "\n" + EQlist.get(0).getStartTime()).block();
+//		for (EQBean EQ : EQlist) {
+//			channel.createMessage(EQ.getname() + "\n" + EQ.getStartTime()).block();
+//		}
 		
 		channel.createMessage("Those are all the EQs on the current schedule").block();
 	}
