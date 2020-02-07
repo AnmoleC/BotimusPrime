@@ -19,7 +19,6 @@ public class RemindMeCommand implements Command {
 	
 	private static ReminderManager manager = ReminderManager.getInstance();	
 	
-	@Override
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		long username = event.getMessage().getAuthor().get().getId().asLong();

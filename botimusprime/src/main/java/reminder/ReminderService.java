@@ -22,7 +22,6 @@ public class ReminderService implements Runnable{
 		return service;
 	}
 	
-	@Override
 	public void run() {
 		List<ReminderBean> reminders;
 		while(true){

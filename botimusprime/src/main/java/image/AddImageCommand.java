@@ -12,7 +12,6 @@ public class AddImageCommand implements Command {
 	private static final String invalidArgsMessage = "Invalid call. Please use the command as follows \n"
 			+ App.BOT_PREFIX + "addImage <name> <link>";
 	
-	@Override
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		String content = event.getMessage().getContent().get();
