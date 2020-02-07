@@ -21,15 +21,14 @@ public class EQBean {
 		return (String) EQJO.get("summary");
 	}
 	
-	public String getStartTime(){
+	public Date getStartTime(){
 		String startString = (String) ((JSONObject) EQJO.get("start")).get("dateTime");
 		try {
-			Date startdate = DateParser.parse(startString);
-			System.out.println(startdate);
+			return DateParser.parse(startString);
 		} catch (java.text.ParseException e) {
 			e.printStackTrace();
 		}
 //		System.out.println(startString);
-		return startString;
+		return null;
 	}
 }

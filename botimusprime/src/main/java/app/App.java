@@ -11,7 +11,7 @@ import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import image.AddImageCommand;
 import image.PostImageCommand;
-import pso2.EQCommands;
+import pso2.PSO2SubCommands;
 import pso2.EQManager;
 import reminder.RemindMeCommand;
 import reminder.ReminderManager;
@@ -32,7 +32,7 @@ public class App
 	    commands.put("echo", new EchoCommand());
 	    commands.put("image", new PostImageCommand());
 	    commands.put("addImage", new AddImageCommand());
-	    commands.put("pso2", new EQCommands());
+	    commands.put("pso2", new PSO2SubCommands());
 	    
 	    ReminderService.getInstance();
 	    ReminderManager.getInstance();
