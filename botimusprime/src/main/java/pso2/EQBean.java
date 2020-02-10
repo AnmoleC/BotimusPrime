@@ -33,6 +33,6 @@ public class EQBean {
 
 	@Override
 	public String toString() {
-		return getName() + "\n" + getStartTime();
+		return String.format("%-30s %-30s", getName(), getStartTime());
 	}
 }

@@ -9,7 +9,6 @@ import com.google.api.client.util.DateTime;
 
 public class DateParser {
 	
-	@SuppressWarnings("deprecation")
 	public static Date parse(String input) throws ParseException{
 //		System.out.println("input:"+input+":");
 		

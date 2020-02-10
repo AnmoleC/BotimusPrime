@@ -11,6 +11,7 @@ public class PSO2SubCommands implements Command {
 	static {
 		subCommands.put("list", new EQListSubCommand());
 		subCommands.put("next", new EQNextSubCommand());
+		subCommands.put("today", new EQTodaySubCommand());
 	}
 	
 	@Override
