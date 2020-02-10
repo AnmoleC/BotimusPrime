@@ -12,8 +12,12 @@ public class EQListCommand implements Command {
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		List<EQBean> EQlist = EQManager.getEQList();
-		channel.createMessage("The next EQ is \n").block();
-		channel.createMessage(EQlist.get(0).getname() + "\n" + EQlist.get(0).getStartTime()).block();
+		
+		channel.createMessage("Listing all EQS on schedule").block();
+		for (EQBean eqBean : EQlist) {
+			channel.createMessage(eqBean.toString() + "\n").block();
+		}
+		channel.createMessage("Finished listing all EQs\n").block();
 	}
 
 }

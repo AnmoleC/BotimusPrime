@@ -17,7 +17,7 @@ public class EQBean {
 		EQJO = (JSONObject) new JSONParser().parse(jsonData);
 	}
 	
-	public String getname(){
+	public String getName(){
 		return (String) EQJO.get("summary");
 	}
 	
@@ -28,7 +28,11 @@ public class EQBean {
 		} catch (java.text.ParseException e) {
 			e.printStackTrace();
 		}
-//		System.out.println(startString);
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return getName() + "\n" + getStartTime();
 	}
 }
