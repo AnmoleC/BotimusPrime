@@ -9,7 +9,8 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class PSO2SubCommands implements Command {
 	private static final Map<String, Command> subCommands = new HashMap<>();
 	static {
-		subCommands.put("list", new EQListCommand());
+		subCommands.put("list", new EQListSubCommand());
+		subCommands.put("next", new EQNextSubCommand());
 	}
 	
 	@Override

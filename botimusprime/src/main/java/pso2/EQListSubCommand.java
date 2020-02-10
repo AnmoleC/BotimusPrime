@@ -6,7 +6,7 @@ import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
 
-public class EQListCommand implements Command {
+public class EQListSubCommand implements Command {
 
 	@Override
 	public void execute(MessageCreateEvent event) {
