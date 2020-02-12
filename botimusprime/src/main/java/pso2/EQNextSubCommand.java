@@ -12,7 +12,7 @@ public class EQNextSubCommand implements Command {
 	@Override
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
-		List<EQBean> EQlist = EQManager.getEQList();
+		List<EQBean> EQlist = EQManager.getAllEQs();
 		int index = 0;
 		while (EQlist.get(index).getStartTime().getTime() < new Date().getTime()) {
 			index++;

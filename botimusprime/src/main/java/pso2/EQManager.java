@@ -2,6 +2,7 @@ package pso2;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -14,6 +15,8 @@ import org.json.simple.parser.ParseException;
 
 public class EQManager {
 	private static CalendarBean calendar;
+	private static Date updated;
+	private static final long cacheDuration = 20000;
 	
 	public static void initialize(String API_key){
 		EQRequestBuilder.setKey(API_key);
@@ -21,6 +24,7 @@ public class EQManager {
 	}
 	
 	private static void fetchEQData(){
+		System.out.println("UPDATED EQ Data");
 		String url = EQRequestBuilder.getURL();
 		HttpGet request = new HttpGet(url);
 		
@@ -34,6 +38,7 @@ public class EQManager {
 				String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
 				
 				calendar = new CalendarBean(json);
+				updated = new Date();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -42,7 +47,20 @@ public class EQManager {
 		}
 	}
 	
-	public static List<EQBean> getEQList(){
-		return calendar.getEQs();
+	public static List<EQBean> getAllEQs(){
+		if(new Date().getTime() - updated.getTime() > cacheDuration){
+			System.out.println(new Date().getTime() - updated.getTime());
+			fetchEQData();
+		}
+		return calendar.getAllEQs();
 	}
+	
+	public static List<EQBean> getUpcomingEQs(){
+		if((new Date().getTime() - updated.getTime()) > cacheDuration){
+			System.out.println(new Date().getTime() - updated.getTime());
+			fetchEQData();
+		}
+		return calendar.getUpcomingEQs();
+	}
+	
 }

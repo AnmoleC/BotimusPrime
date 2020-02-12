@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.google.api.client.util;
+package util;
 
 import java.io.Serializable;
 import java.util.Arrays;

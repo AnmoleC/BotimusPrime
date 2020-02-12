@@ -7,7 +7,7 @@ public class PongCommand implements Command {
 	public void execute(MessageCreateEvent event) {
 		event.getMessage()
         .getChannel().block()
-        .createMessage("Pong!").block();
+        .createMessage("Pong!").subscribe();
 	}
 
 }

@@ -11,14 +11,14 @@ public class EQListSubCommand implements Command {
 	@Override
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
-		List<EQBean> EQlist = EQManager.getEQList();
+		List<EQBean> EQlist = EQManager.getUpcomingEQs();
 		int listLen = Math.min(EQlist.size(), 20);
 		channel.createMessage("Listing next 20 EQS on schedule").block();
 		
 		for (int i=0; i < listLen; i++) {
 			channel.createMessage(EQlist.get(i).toString() + "\n").block();
 		}
-		channel.createMessage("Finished listing EQs\n").block();
+		channel.createMessage("Finished listing Events\n").block();
 	}
 
 }

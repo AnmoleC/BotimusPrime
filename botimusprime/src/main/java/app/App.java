@@ -25,7 +25,6 @@ public class App
 {
 	private static final Map<String, Command> commands = new HashMap<>();
 	public static final char BOT_PREFIX = '!';
-	
 	static {
 	    commands.put("ping" , new PongCommand());
 	    commands.put("remindme", new RemindMeCommand());
@@ -43,11 +42,10 @@ public class App
         System.out.println( "Hello World!" );
         
         if (args.length != 2){
-        	System.out.println("Please run with the following 2 arguments in the following order\n"
-        			+ "DiscordBot Token"
-        			+ "Google Calendar API key"
+        	System.out.println("Please run with the following 2 arguments in the following order"
+        			+ "\nDiscordBot Token"
+        			+ "\nGoogle Calendar API key"
         			);
-        	
         	return;
         }
         

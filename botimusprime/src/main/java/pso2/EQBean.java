@@ -30,6 +30,16 @@ public class EQBean {
 		}
 		return null;
 	}
+	
+	public Date getEndTime(){
+		String startString = (String) ((JSONObject) EQJO.get("end")).get("dateTime");
+		try {
+			return DateParser.parse(startString);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Override
 	public String toString() {

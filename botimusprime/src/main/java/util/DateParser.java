@@ -5,8 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.google.api.client.util.DateTime;
-
 public class DateParser {
 	
 	public static Date parse(String input) throws ParseException{

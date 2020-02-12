@@ -12,7 +12,7 @@ public class EQTodaySubCommand implements Command {
 	@Override
 	public void execute(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
-		List<EQBean> EQlist = EQManager.getEQList();
+		List<EQBean> EQlist = EQManager.getAllEQs();
 		
 		channel.createMessage("Listing all EQS on schedule").block();
 		Date endOfToday = new Date();
