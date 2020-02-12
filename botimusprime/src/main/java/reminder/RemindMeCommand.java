@@ -1,9 +1,7 @@
 package reminder;
 
 import java.text.ParseException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import app.App;
 import basicCommands.Command;
@@ -24,7 +22,7 @@ public class RemindMeCommand implements Command {
 		long username = event.getMessage().getAuthor().get().getId().asLong();
 		String content = event.getMessage().getContent().get().replaceAll(" +", " ");
 
-		if (!content.matches("!remindme[\\s]*<[\\d]?[\\d]:[\\d]?[\\d]>[\\w\\s]*")){
+		if (!content.matches(App.BOT_PREFIX + "remindme[\\s]*<[\\d]?[\\d]:[\\d]?[\\d]>[\\w\\s]*")){
 			channel.createMessage(invalidArgsMessage).block();
 			return;
 		}

@@ -1,10 +1,17 @@
 package app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import basicCommands.AbstractCommand;
 import basicCommands.Command;
 import basicCommands.EchoCommand;
+import basicCommands.HelpCommand;
 import basicCommands.PongCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
@@ -23,18 +30,26 @@ import reminder.ReminderService;
  */
 public class App 
 {
-	private static final Map<String, Command> commands = new HashMap<>();
 	public static final char BOT_PREFIX = '!';
+	private static final List<AbstractCommand> commandSet = new ArrayList<>();
+	private static final Map<String, AbstractCommand> commands = new HashMap<>();
 	static {
-	    commands.put("ping" , new PongCommand());
-	    commands.put("remindme", new RemindMeCommand());
-	    commands.put("echo", new EchoCommand());
-	    commands.put("image", new PostImageCommand());
-	    commands.put("addImage", new AddImageCommand());
-	    commands.put("pso2", new PSO2SubCommands());
-	    
-	    ReminderService.getInstance();
-	    ReminderManager.getInstance();
+		commandSet.add(new HelpCommand());
+		commandSet.add(new PongCommand());
+		commandSet.add(new EchoCommand());
+		
+		for (AbstractCommand command : commandSet) {
+			commands.put(command.prefix(), command);
+		}
+
+//	    commands.put("echo", new EchoCommand());
+//	    commands.put("image", new PostImageCommand());
+//	    commands.put("addImage", new AddImageCommand());
+//	    commands.put("remindme", new RemindMeCommand());
+//	    commands.put("pso2", new PSO2SubCommands());
+//	    
+//	    ReminderService.getInstance();
+//	    ReminderManager.getInstance();
 	}
 	
     public static void main( String[] args )
@@ -42,15 +57,15 @@ public class App
         System.out.println( "Hello World!" );
         
         if (args.length != 2){
-        	System.out.println("Please run with the following 2 arguments in the following order"
-        			+ "\nDiscordBot Token"
-        			+ "\nGoogle Calendar API key"
+        	System.out.println("Please run with the following 2 arguments in the following order\n"
+        			+ "DiscordBot Token\n"
+        			+ "Google Calendar API key"
         			);
         	return;
         }
         
         final DiscordClient client = new DiscordClientBuilder(args[0]).build();
-        EQManager.initialize(args[1]);
+//        EQManager.initialize(args[1]);
         
         client.getEventDispatcher().on(MessageCreateEvent.class)
         // subscribe is like block, in that it will *request* for action
@@ -58,7 +73,7 @@ public class App
         // to finish, it will just execute the results asynchronously.
         .subscribe(event -> {
             final String content = event.getMessage().getContent().orElse("");
-            for (final Map.Entry<String, Command> entry : commands.entrySet()) {
+            for (final Entry<String, AbstractCommand> entry : commands.entrySet()) {
                 if (content.startsWith(BOT_PREFIX + entry.getKey())) {
                     entry.getValue().execute(event);
                     break;
@@ -67,5 +82,9 @@ public class App
         });
         
         client.login().block();
+    }
+    
+    public static Set<AbstractCommand> CommandList(){
+    	return new HashSet<>(commandSet);
     }
 }

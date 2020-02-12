@@ -1,13 +1,34 @@
 package basicCommands;
 
+import app.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
-public class PongCommand implements Command {
-	
-	public void execute(MessageCreateEvent event) {
+public class PongCommand extends AbstractCommand{
+
+	@Override
+	void executeCommand(MessageCreateEvent event) {
 		event.getMessage()
-        .getChannel().block()
-        .createMessage("Pong!").subscribe();
+			.getChannel().block()
+			.createMessage("Pong!").block();		
 	}
 
+	@Override
+	public String prefix() {
+		return "ping";
+	}
+
+	@Override
+	String syntaxRegex() {
+		return App.BOT_PREFIX + prefix();
+	}
+
+	@Override
+	public String helpMsg() {
+		return syntaxRegex();
+	}
+
+	@Override
+	protected String description() {
+		return "Prints 'Pong!' to the same channel";
+	}
 }

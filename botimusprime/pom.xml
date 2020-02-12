@@ -10,6 +10,13 @@
   <name>botimusprime</name>
   <url>http://maven.apache.org</url>
 
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -34,5 +41,11 @@
 	    <version>4.5.10</version>
 	</dependency>
 
+	<dependency>
+	    <groupId>com.github.xaanit</groupId>
+	    <artifactId>ArgumentParse</artifactId>
+	    <version>1.1</version>
+	</dependency>
+	
   </dependencies>
 </project>
