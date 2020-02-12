@@ -13,9 +13,9 @@ import util.DateParser;
 
 public class RemindMeCommand implements Command {
 	private static final String parseErrMessage = "Invalid time format. Please specify a wait time in the format <Hours:minutes>";
-	private static final String invalidArgsMessage = "Invalid call. Please use the command as follows \n"
-														+ App.BOT_PREFIX + "remindme <waitTime(hours:minutes)> or"
-														+ App.BOT_PREFIX + "remindme <Date (Weekday hour:minute)>";
+	private static final String invalidArgsMessage = "Invalid call. Please use the command in one of the following formats:\n"
+														+ App.BOT_PREFIX + "remindme <waitTime(hours:minutes)> Message\n"
+														+ App.BOT_PREFIX + "remindme <Date (Weekday hour:minute) Message>";
 	
 	private static ReminderManager manager = ReminderManager.getInstance();	
 	
@@ -23,19 +23,20 @@ public class RemindMeCommand implements Command {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		long username = event.getMessage().getAuthor().get().getId().asLong();
 		String content = event.getMessage().getContent().get().replaceAll(" +", " ");
-		List<String> args = Arrays.asList(content.split(" "));
-		
-		if (args.size() < 2){
-			channel.createMessage(invalidArgsMessage);
+
+		if (!content.matches("!remindme[\\s]*<[\\d]?[\\d]:[\\d]?[\\d]>[\\w\\s]*")){
+			channel.createMessage(invalidArgsMessage).block();
 			return;
 		}
+		String payload = content.substring(content.indexOf('<')+1, content.indexOf('>'));
+		String message = content.substring(content.indexOf('>')+1).trim();
 		
-		String payload = content.substring(content.indexOf(' ')).trim();
 		try {
 			Date reminderTime = DateParser.parse(payload);
 			if (reminderTime != null){
-				ReminderBean reminder = new ReminderBean(channel, "<@"+username+">", reminderTime);
+				ReminderBean reminder = new ReminderBean(channel, username, reminderTime, message);
 				manager.addReminder(reminder);
+				channel.createMessage("Reminder created for " + reminderTime).block();
 			}else{
 				channel.createMessage(parseErrMessage).block();
 			}

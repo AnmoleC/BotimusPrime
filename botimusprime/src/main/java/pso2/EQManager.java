@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 public class EQManager {
 	private static CalendarBean calendar;
 	private static Date updated;
-	private static final long cacheDuration = 20000;
+	private static final long cacheDuration = 3600000; //milliseconds
 	
 	public static void initialize(String API_key){
 		EQRequestBuilder.setKey(API_key);
