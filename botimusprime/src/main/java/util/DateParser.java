@@ -6,9 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateParser {
+	private static final String parseErrMessage = "Invalid time format. Acceptable fomats are:\n<Hours:minutes>\n<Weekday Hours:minutes>";
 	
-	public static Date parse(String input) throws ParseException{
-//		System.out.println("input:"+input+":");
+	public static Date parse(String input) throws ParseException{	
 		
 		if(input.matches("[\\d]?[\\d]:[\\d]?[\\d]")){
 //			System.out.println("Basic");
@@ -36,6 +36,6 @@ public class DateParser {
 			return new Date(dateTime.getValue());
 		}
 
-		return null;
+		throw new ParseException(parseErrMessage, 0);
 	}
 }

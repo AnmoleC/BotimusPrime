@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import basicCommands.AbstractCommand;
 import basicCommands.Command;
 import basicCommands.EchoCommand;
 import basicCommands.HelpCommand;
@@ -31,22 +30,21 @@ import reminder.ReminderService;
 public class App 
 {
 	public static final char BOT_PREFIX = '!';
-	private static final List<AbstractCommand> commandSet = new ArrayList<>();
-	private static final Map<String, AbstractCommand> commands = new LinkedHashMap<>();
+	private static final List<Command> commandSet = new ArrayList<>();
+	private static final Map<String, Command> commands = new LinkedHashMap<>();
 	static {
 		commandSet.add(new HelpCommand());
 		commandSet.add(new PongCommand());
 		commandSet.add(new EchoCommand());
 		commandSet.add(new PostImageCommand());
 		commandSet.add(new AddImageCommand());
+		commandSet.add(new RemindMeCommand());
+		commandSet.add(new PSO2SubCommands());
 		
-		for (AbstractCommand command : commandSet) {
+		for (Command command : commandSet) {
 			commands.put(command.prefix(), command);
 		}
 
-//	    commands.put("remindme", new RemindMeCommand());
-//	    commands.put("pso2", new PSO2SubCommands());
-//	    
 	    ReminderService.getInstance();
 	    ReminderManager.getInstance();
 	}
@@ -64,7 +62,7 @@ public class App
         }
         
         final DiscordClient client = new DiscordClientBuilder(args[0]).build();
-//        EQManager.initialize(args[1]);
+        EQManager.initialize(args[1]);
         
         client.getEventDispatcher().on(MessageCreateEvent.class)
         // subscribe is like block, in that it will *request* for action
@@ -72,18 +70,19 @@ public class App
         // to finish, it will just execute the results asynchronously.
         .subscribe(event -> {
             final String content = event.getMessage().getContent().orElse("");
-            for (final Entry<String, AbstractCommand> entry : commands.entrySet()) {
+            for (final Entry<String, Command> entry : commands.entrySet()) {
                 if (content.startsWith(BOT_PREFIX + entry.getKey())) {
                     entry.getValue().execute(event);
                     break;
                 }
             }
+           
         });
         
         client.login().block();
     }
     
-    public static Set<AbstractCommand> CommandList(){
+    public static Set<Command> CommandList(){
     	return new HashSet<>(commandSet);
     }
 }

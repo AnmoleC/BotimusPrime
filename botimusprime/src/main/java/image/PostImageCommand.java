@@ -3,10 +3,10 @@ package image;
 import java.util.Map;
 
 import app.App;
-import basicCommands.AbstractCommand;
+import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
-public class PostImageCommand extends AbstractCommand{
+public class PostImageCommand extends Command{
 	
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
@@ -24,12 +24,12 @@ public class PostImageCommand extends AbstractCommand{
 	}
 
 	@Override
-	protected String syntaxRegex() {
-		return App.BOT_PREFIX + prefix() + "[\\s][\\w]*";
+	public String syntaxRegex() {
+		return prefix() + "[\\s][\\w]*";
 	}
 
 	@Override
-	public String helpMsg() {
+	public String syntaxMsg() {
 		return App.BOT_PREFIX + prefix() + " **keyword**";
 	}
 

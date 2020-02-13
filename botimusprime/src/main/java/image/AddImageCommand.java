@@ -1,10 +1,10 @@
 package image;
 
 import app.App;
-import basicCommands.AbstractCommand;
+import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
-public class AddImageCommand extends AbstractCommand {
+public class AddImageCommand extends Command {
 
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
@@ -21,12 +21,12 @@ public class AddImageCommand extends AbstractCommand {
 	}
 
 	@Override
-	protected String syntaxRegex() {
-		return App.BOT_PREFIX + prefix() + "[\\s][\\w]*[\\s][\\w\\.\\\\:&\\?\\/=]*";
+	public String syntaxRegex() {
+		return prefix() + "[\\s][\\w]*[\\s][\\w\\.\\\\:&\\?\\/=]*";
 	}
 
 	@Override
-	public String helpMsg() {
+	public String syntaxMsg() {
 		return App.BOT_PREFIX + prefix() + " **keyword** **url**";
 	}
 

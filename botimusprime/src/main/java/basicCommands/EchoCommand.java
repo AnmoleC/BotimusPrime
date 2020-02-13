@@ -3,7 +3,7 @@ package basicCommands;
 import app.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
-public class EchoCommand extends AbstractCommand {
+public class EchoCommand extends Command {
 	private final int maxRepeats = 10;
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
@@ -21,12 +21,12 @@ public class EchoCommand extends AbstractCommand {
 	}
 
 	@Override
-	protected String syntaxRegex() {
-		return App.BOT_PREFIX + prefix() + "[\\s][\\w<@!>]*[\\s][\\d]+";
+	public String syntaxRegex() {
+		return prefix() + "[\\s][\\w<@!>]*[\\s][\\d]+";
 	}
 
 	@Override
-	public String helpMsg() {
+	public String syntaxMsg() {
 		return App.BOT_PREFIX + prefix() + " **Message** **Repeats**";
 	}
 

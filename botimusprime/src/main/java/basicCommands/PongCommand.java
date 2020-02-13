@@ -3,7 +3,7 @@ package basicCommands;
 import app.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 
-public class PongCommand extends AbstractCommand{
+public class PongCommand extends Command{
 
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
@@ -18,12 +18,12 @@ public class PongCommand extends AbstractCommand{
 	}
 
 	@Override
-	protected String syntaxRegex() {
-		return App.BOT_PREFIX + prefix();
+	public String syntaxRegex() {
+		return prefix();
 	}
 
 	@Override
-	public String helpMsg() {
+	public String syntaxMsg() {
 		return syntaxRegex();
 	}
 
