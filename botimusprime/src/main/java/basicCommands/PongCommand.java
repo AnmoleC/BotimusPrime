@@ -24,7 +24,7 @@ public class PongCommand extends Command{
 
 	@Override
 	public String syntaxMsg() {
-		return syntaxRegex();
+		return App.BOT_PREFIX + syntaxRegex();
 	}
 
 	@Override

@@ -15,7 +15,13 @@ public class HelpCommand extends Command {
 		String result = "```";
 		result += "Bot Prefix is " + App.BOT_PREFIX + "\n";
 		for (Command command : commandSet) {
-			result += String.format("%-10s \t %-40s \t %-50s \n", command.prefix(), command.syntaxMsg(), command.description());
+			if(!content.equals("")){
+				if (command.prefix().equals(content.trim())){
+					result += command.description() + ". Syntax:\n" + command.syntaxMsg();
+				}
+			}else{
+				result += String.format("%-10s \t %-40s \t %-50s \n", command.prefix(), command.syntaxMsg(), command.description());
+			}
 		}
 		result += "```";
 		channel.createMessage(result).block();
@@ -29,12 +35,12 @@ public class HelpCommand extends Command {
 
 	@Override
 	public String syntaxRegex() {
-		return prefix();
+		return prefix() + "[\\s\\w]*";
 	}
 
 	@Override
 	public String syntaxMsg() {
-		return syntaxRegex();
+		return App.BOT_PREFIX + prefix();
 	}
 
 	@Override
