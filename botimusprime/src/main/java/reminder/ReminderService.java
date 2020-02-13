@@ -29,7 +29,7 @@ public class ReminderService implements Runnable{
 //			System.out.println(reminders.size() + " Reminders");
 			Date now = new Date();
 			for (ReminderBean reminder : reminders) {
-				System.out.println(reminder);
+//				System.out.println(reminder);
 				if(reminder.getDate().getTime() <= now.getTime())
 					manager.printReminder(reminder);
 			}

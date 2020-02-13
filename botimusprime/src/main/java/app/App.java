@@ -19,6 +19,7 @@ import image.AddImageCommand;
 import image.PostImageCommand;
 import pso2.PSO2SubCommands;
 import pso2.EQManager;
+import reminder.CheckRemindersCommand;
 import reminder.RemindMeCommand;
 import reminder.ReminderManager;
 import reminder.ReminderService;
@@ -39,6 +40,7 @@ public class App
 		commandSet.add(new PostImageCommand());
 		commandSet.add(new AddImageCommand());
 		commandSet.add(new RemindMeCommand());
+		commandSet.add(new CheckRemindersCommand());
 		commandSet.add(new PSO2SubCommands());
 		
 		for (Command command : commandSet) {

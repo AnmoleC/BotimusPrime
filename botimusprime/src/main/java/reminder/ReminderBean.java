@@ -17,6 +17,9 @@ public class ReminderBean {
 		this.userID = userID;
 		this.message = message;
 		this.date = date;
+		if(this.message == null){
+			this.message = "";
+		}
 	}
 
 	public MessageChannel getChannel() {
@@ -41,7 +44,7 @@ public class ReminderBean {
 
 	@Override
 	public String toString() {
-		return "ReminderBean [message=" + message + ", date=" + date + "]";
+		return "On " + date + " do " + message;
 	}
 	
 }

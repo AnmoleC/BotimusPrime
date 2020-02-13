@@ -47,7 +47,7 @@ public class RemindMeCommand extends Command {
 
 	@Override
 	protected String description() {
-		return "Created a reminder up to a week in advance which pings you and prints an optional message";
+		return "Creates a reminder up to a week in advance which pings you and prints an optional message";
 	}
 		
 }
