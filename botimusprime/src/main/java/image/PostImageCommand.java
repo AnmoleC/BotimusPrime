@@ -1,35 +1,41 @@
 package image;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import app.App;
-import basicCommands.Command;
+import basicCommands.AbstractCommand;
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import discord4j.core.object.entity.MessageChannel;
 
-public class PostImageCommand implements Command {
-	private static final String invalidArgsMessage = "Invalid call. Please use the command as follows \n"
-			+ App.BOT_PREFIX + "image <name>";
+public class PostImageCommand extends AbstractCommand{
 	
-	public void execute(MessageCreateEvent event) {
-		MessageChannel channel = event.getMessage().getChannel().block();
-		String content = event.getMessage().getContent().get();
-		List<String> args = Arrays.asList(content.split(" "));
-		
-		if (args.size() < 2){
-			channel.createMessage(invalidArgsMessage).block();
-			return;
-		}
-		
-		String name = args.get(1);
+	@Override
+	protected void executeCommand(MessageCreateEvent event) {
 		Map<String, String> images = ImageManager.getImages();
 		
 		for (String key : images.keySet()) {
-			if(key.equals(name))
-				channel.createMessage( images.get(key)).block();
+			if(key.equals(content))
+				channel.createMessage(images.get(key)).block();
 		}
+	}
+
+	@Override
+	public String prefix() {
+		return "image";
+	}
+
+	@Override
+	protected String syntaxRegex() {
+		return App.BOT_PREFIX + prefix() + "[\\s][\\w]*";
+	}
+
+	@Override
+	public String helpMsg() {
+		return App.BOT_PREFIX + prefix() + " **keyword**";
+	}
+
+	@Override
+	protected String description() {
+		return "Posts an image from a saved list";
 	}
 
 }

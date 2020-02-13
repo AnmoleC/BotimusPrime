@@ -6,7 +6,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class EchoCommand extends AbstractCommand {
 	private final int maxRepeats = 10;
 	@Override
-	void executeCommand(MessageCreateEvent event) {
+	protected void executeCommand(MessageCreateEvent event) {
 		String message = content.substring(0, content.lastIndexOf(' ')).trim();
 		int repeats = Math.min(Integer.parseInt(content.substring(content.lastIndexOf(' '), content.length()).trim()), maxRepeats);
 		
@@ -21,8 +21,8 @@ public class EchoCommand extends AbstractCommand {
 	}
 
 	@Override
-	String syntaxRegex() {
-		return App.BOT_PREFIX + prefix() + "[\\s]*[\\w<@!>]*[\\s]*[\\d]+";
+	protected String syntaxRegex() {
+		return App.BOT_PREFIX + prefix() + "[\\s][\\w<@!>]*[\\s][\\d]+";
 	}
 
 	@Override

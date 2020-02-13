@@ -9,7 +9,7 @@ import discord4j.core.object.entity.MessageChannel;
 public class HelpCommand extends AbstractCommand {
 
 	@Override
-	void executeCommand(MessageCreateEvent event) {
+	protected void executeCommand(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
 		Set<AbstractCommand> commandSet = App.CommandList();
 		String result = "```";
@@ -28,7 +28,7 @@ public class HelpCommand extends AbstractCommand {
 	}
 
 	@Override
-	String syntaxRegex() {
+	protected String syntaxRegex() {
 		return App.BOT_PREFIX+prefix();
 	}
 

@@ -22,7 +22,6 @@ public class ImageManager {
 	}
 	
 	public static void parse(){
-		
 		try(FileReader reader = new FileReader(imageFilePath)) {
 			Object imageObj = new JSONParser().parse( reader );
 			JSONObject imageJO = (JSONObject) imageObj;
@@ -67,7 +66,7 @@ public class ImageManager {
 			e.printStackTrace();
 		}
 		
-		System.out.println("SUCCESS");
+		System.out.println("Wrote imageMap to disc");
 	}
 	
 	public static Map<String, String> getImages(){

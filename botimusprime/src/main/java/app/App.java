@@ -1,8 +1,8 @@
 package app;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,24 +32,23 @@ public class App
 {
 	public static final char BOT_PREFIX = '!';
 	private static final List<AbstractCommand> commandSet = new ArrayList<>();
-	private static final Map<String, AbstractCommand> commands = new HashMap<>();
+	private static final Map<String, AbstractCommand> commands = new LinkedHashMap<>();
 	static {
 		commandSet.add(new HelpCommand());
 		commandSet.add(new PongCommand());
 		commandSet.add(new EchoCommand());
+		commandSet.add(new PostImageCommand());
+		commandSet.add(new AddImageCommand());
 		
 		for (AbstractCommand command : commandSet) {
 			commands.put(command.prefix(), command);
 		}
 
-//	    commands.put("echo", new EchoCommand());
-//	    commands.put("image", new PostImageCommand());
-//	    commands.put("addImage", new AddImageCommand());
 //	    commands.put("remindme", new RemindMeCommand());
 //	    commands.put("pso2", new PSO2SubCommands());
 //	    
-//	    ReminderService.getInstance();
-//	    ReminderManager.getInstance();
+	    ReminderService.getInstance();
+	    ReminderManager.getInstance();
 	}
 	
     public static void main( String[] args )

@@ -4,10 +4,9 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
 
 public abstract class AbstractCommand implements Command {
-	abstract void executeCommand(MessageCreateEvent event);
-	
+	protected abstract void executeCommand(MessageCreateEvent event);
 	public abstract String prefix();
-	abstract String syntaxRegex();
+	protected abstract String syntaxRegex();
 	public abstract String helpMsg();
 	protected abstract String description();
 	protected MessageChannel channel;
@@ -16,14 +15,15 @@ public abstract class AbstractCommand implements Command {
 	
 	public void execute(MessageCreateEvent event){
 		channel = event.getMessage().getChannel().block();
-		String fullContent = event.getMessage().getContent().get().trim();
+		String fullContent = event.getMessage().getContent().get().trim().replaceAll("\\s+", " ");
 		
 		if(!fullContent.matches(syntaxRegex())){
 			channel.createMessage(parseErrorMsg()).block();
-			System.out.println(fullContent);
+//			System.out.println(fullContent+"'");
 			return;
 		}
 		content = fullContent.substring(prefix().length()+1).trim();
+//		System.out.println(content + ":");
 		executeCommand(event);
 	}
 	

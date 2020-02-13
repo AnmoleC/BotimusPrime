@@ -6,7 +6,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 public class PongCommand extends AbstractCommand{
 
 	@Override
-	void executeCommand(MessageCreateEvent event) {
+	protected void executeCommand(MessageCreateEvent event) {
 		event.getMessage()
 			.getChannel().block()
 			.createMessage("Pong!").block();		
@@ -18,7 +18,7 @@ public class PongCommand extends AbstractCommand{
 	}
 
 	@Override
-	String syntaxRegex() {
+	protected String syntaxRegex() {
 		return App.BOT_PREFIX + prefix();
 	}
 
