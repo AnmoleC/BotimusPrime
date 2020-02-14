@@ -59,7 +59,7 @@ public class PSO2SubCommands extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix() + " **subCommands**";
+		return App.bot.BOT_PREFIX + prefix() + " **subCommands**";
 	}
 
 	@Override

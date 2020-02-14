@@ -13,7 +13,6 @@ public class RemindMeCommand extends Command {
 	
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
-		System.out.println("SYNTAX PASS");
 		long username = event.getMessage().getAuthor().get().getId().asLong();
 		String time = content.substring(content.indexOf('<')+1, content.indexOf('>'));
 		String message = content.substring(content.indexOf('>')+1).trim();
@@ -42,7 +41,7 @@ public class RemindMeCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix() + " <**Time**> **Message (Optional)**";
+		return App.bot.BOT_PREFIX + prefix() + " <**Time**> **Message (Optional)**";
 	}
 
 	@Override

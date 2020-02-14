@@ -27,7 +27,7 @@ public class AddImageCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix() + " **keyword** **url**";
+		return App.bot.BOT_PREFIX + prefix() + " **keyword** **url**";
 	}
 
 	@Override

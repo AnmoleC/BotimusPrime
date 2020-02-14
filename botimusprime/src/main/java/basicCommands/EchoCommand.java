@@ -7,6 +7,7 @@ public class EchoCommand extends Command {
 	private final int maxRepeats = 10;
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
+		
 		String message = content.substring(0, content.lastIndexOf(' ')).trim();
 		int repeats = Math.min(Integer.parseInt(content.substring(content.lastIndexOf(' '), content.length()).trim()), maxRepeats);
 		
@@ -27,7 +28,7 @@ public class EchoCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix() + " **Message** **Repeats**";
+		return App.bot.BOT_PREFIX + prefix() + " **Message** **Repeats**";
 	}
 
 	@Override

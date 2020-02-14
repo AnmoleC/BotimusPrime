@@ -30,7 +30,7 @@ public class PostImageCommand extends Command{
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix() + " **keyword**";
+		return App.bot.BOT_PREFIX + prefix() + " **keyword**";
 	}
 
 	@Override

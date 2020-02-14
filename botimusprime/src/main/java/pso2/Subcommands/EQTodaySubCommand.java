@@ -45,7 +45,7 @@ public class EQTodaySubCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + PSO2SubCommands.staticPrefix() + " " + prefix();
+		return App.bot.BOT_PREFIX + PSO2SubCommands.staticPrefix() + " " + prefix();
 	}
 
 	@Override

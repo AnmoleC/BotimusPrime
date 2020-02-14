@@ -1,6 +1,6 @@
 package basicCommands;
 
-import java.util.Set;
+import java.util.List;
 
 import app.App;
 import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -11,10 +11,10 @@ public class HelpCommand extends Command {
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
 		MessageChannel channel = event.getMessage().getChannel().block();
-		Set<Command> commandSet = App.CommandList();
+		List<Command> commandList = App.bot.commandList();
 		String result = "```";
-		result += "Bot Prefix is " + App.BOT_PREFIX + "\n";
-		for (Command command : commandSet) {
+		result += "Bot Prefix is " + App.bot.BOT_PREFIX + "\n";
+		for (Command command : commandList) {
 			if(!content.equals("")){
 				if (command.prefix().equals(content.trim())){
 					result += command.description() + ". Syntax:\n" + command.syntaxMsg();
@@ -40,7 +40,7 @@ public class HelpCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix();
+		return App.bot.BOT_PREFIX + prefix();
 	}
 
 	@Override

@@ -32,7 +32,7 @@ public class CheckRemindersCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.BOT_PREFIX + prefix();
+		return App.bot.BOT_PREFIX + prefix();
 	}
 
 	@Override

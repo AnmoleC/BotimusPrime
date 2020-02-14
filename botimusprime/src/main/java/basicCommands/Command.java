@@ -28,7 +28,7 @@ public abstract class Command{
 		channel = event.getMessage().getChannel().block();
 		String fullContent = event.getMessage().getContent().get().trim().replaceAll("\\s+", " ");
 		
-		if(!fullContent.matches(App.BOT_PREFIX + syntaxRegex()) && !subCommand){
+		if(!fullContent.matches(App.bot.BOT_PREFIX + syntaxRegex()) && !subCommand){
 			channel.createMessage(parseErrorMsg()).block();
 //			System.out.println(fullContent+"'");
 			return;
