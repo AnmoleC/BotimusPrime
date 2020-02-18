@@ -8,7 +8,6 @@ import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import pso2.EQBean;
 import pso2.EQManager;
-import pso2.PSO2SubCommands;
 
 public class EQTodaySubCommand extends Command {
 

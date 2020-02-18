@@ -6,10 +6,6 @@ import pso2.EQManager;
 import reminder.ReminderManager;
 import reminder.ReminderService;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 	public static Bot bot;
@@ -33,7 +29,7 @@ public class App
         
         EQManager.initialize(args[1]);
 	    ReminderService.getInstance();
-
+	    
         client.login().block();
     }
 

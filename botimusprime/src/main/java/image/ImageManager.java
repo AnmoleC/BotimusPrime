@@ -16,6 +16,7 @@ import org.json.simple.parser.ParseException;
 public class ImageManager {
 	private static Map<String, String> images = new HashMap<>();
 	private static String imageFilePath = System.getProperty("user.dir") + "\\resources\\images.json";
+	
 	public ImageManager() {
 		super();
 		parse();
@@ -40,7 +41,6 @@ public class ImageManager {
 			e.printStackTrace();
 			System.out.println("Failed to reload image map. File not found");
 		}
-		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -54,10 +54,8 @@ public class ImageManager {
 			item.put("link", images.get(key));
 			imageJA.add(item);
 		}
-		
 		imageJO.put("images", imageJA);
-		
-		
+				
 		try(PrintWriter writer = new PrintWriter(imageFilePath)){
 			writer.write(imageJO.toJSONString());
 			writer.flush();

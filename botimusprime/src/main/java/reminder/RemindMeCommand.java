@@ -41,7 +41,7 @@ public class RemindMeCommand extends Command {
 
 	@Override
 	public String syntaxMsg() {
-		return App.bot.BOT_PREFIX + prefix() + " <**Time**> **Message (Optional)**";
+		return App.bot.BOT_PREFIX + prefix() + " <**hours**:**minutes**> **Message (Optional)**";
 	}
 
 	@Override

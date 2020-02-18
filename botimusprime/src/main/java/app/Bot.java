@@ -14,9 +14,12 @@ import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.util.Snowflake;
+import game.Game;
+import game.GameManager;
+import game.commands.CreateGameCommand;
 import image.AddImageCommand;
 import image.PostImageCommand;
-import pso2.PSO2SubCommands;
+import pso2.Subcommands.PSO2SubCommands;
 import reminder.CheckRemindersCommand;
 import reminder.RemindMeCommand;
 
@@ -45,6 +48,7 @@ public class Bot {
 		commandList.add(new RemindMeCommand());
 		commandList.add(new CheckRemindersCommand());
 		commandList.add(new PSO2SubCommands());
+		commandList.add(new CreateGameCommand());
 		
 		for (Command command : commandList) {
 			commandMap.put(command.prefix(), command);
@@ -58,6 +62,17 @@ public class Bot {
 	        // to finish, it will just execute the results asynchronously.
 	        .subscribe(event -> {
 	            final String content = event.getMessage().getContent().orElse("");
+	            
+	            List<Game> games = GameManager.games();
+	            for (Game currGame : games) {
+					if( currGame.getChannel().getId().equals(event.getMessage().getChannelId())	
+							&& !event.getMessage().getAuthor().get().isBot() ){
+						currGame.execute(event);
+						break;
+					}
+	            	
+	            }
+	            
 	            for (final Entry<String, Command> entry : commandMap().entrySet()) {
 	                if (content.startsWith(BOT_PREFIX + entry.getKey())) {
 	                    entry.getValue().execute(event);

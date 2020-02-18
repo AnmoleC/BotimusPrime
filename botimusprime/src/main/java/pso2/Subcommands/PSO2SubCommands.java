@@ -1,4 +1,4 @@
-package pso2;
+package pso2.Subcommands;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,9 +8,6 @@ import java.util.Map;
 import app.App;
 import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import pso2.Subcommands.EQListSubCommand;
-import pso2.Subcommands.EQNextSubCommand;
-import pso2.Subcommands.EQTodaySubCommand;
 
 public class PSO2SubCommands extends Command {
 	private static final List<Command> subCommandSet = new ArrayList<>();
