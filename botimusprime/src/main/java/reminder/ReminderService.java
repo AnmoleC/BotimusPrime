@@ -3,18 +3,20 @@ package reminder;
 import java.util.Date;
 import java.util.List;
 
-public class ReminderService implements Runnable{
+import app.App;
 
+public class ReminderService implements Runnable{
 	private static ReminderService service;
-	private static ReminderManager manager = ReminderManager.getInstance();
+	private static ReminderManager manager;
 	private static int UPDATE = 10000;
 	
-	private ReminderService() {
+	public ReminderService() {
 		super();
 	}
 
 	public static ReminderService getInstance(){
 		if (service == null){
+			manager = App.reminderManager;
 			service = new ReminderService();
 			Thread thread = new Thread(service);
 			thread.start();

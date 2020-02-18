@@ -4,20 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReminderManager {
-
-	private static ReminderManager reminderManager;
 	private static List<ReminderBean> reminders = new ArrayList<ReminderBean>();
-
-	private ReminderManager() {
-		super();
-	}
-
-	public static ReminderManager getInstance(){
-		if (reminderManager == null){
-			reminderManager = new ReminderManager();
-		}
-		return reminderManager;
-	}
 	
 	public void addReminder(ReminderBean reminder){
 		reminders.add(reminder);

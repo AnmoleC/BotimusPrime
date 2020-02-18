@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import basicCommands.Command;
 import basicCommands.EchoCommand;
@@ -11,6 +12,7 @@ import basicCommands.HelpCommand;
 import basicCommands.PongCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
+import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.util.Snowflake;
 import image.AddImageCommand;
 import image.PostImageCommand;
@@ -30,6 +32,7 @@ public class Bot {
 		super();
 		client = new DiscordClientBuilder(botToken).build();
 		initilizeCommands();
+		listeners();
 		userID = client.getSelf().block().getId();
 	}
 	
@@ -46,6 +49,22 @@ public class Bot {
 		for (Command command : commandList) {
 			commandMap.put(command.prefix(), command);
 		}
+	}
+	
+	private void listeners(){
+		 client.getEventDispatcher().on(MessageCreateEvent.class)
+	        // subscribe is like block, in that it will *request* for action
+	        // to be done, but instead of blocking the thread, waiting for it
+	        // to finish, it will just execute the results asynchronously.
+	        .subscribe(event -> {
+	            final String content = event.getMessage().getContent().orElse("");
+	            for (final Entry<String, Command> entry : commandMap().entrySet()) {
+	                if (content.startsWith(BOT_PREFIX + entry.getKey())) {
+	                    entry.getValue().execute(event);
+	                    break;
+	                }
+	            }
+	        });
 	}
 	
 	public DiscordClient client(){

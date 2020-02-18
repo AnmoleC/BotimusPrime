@@ -11,7 +11,7 @@ public class CheckRemindersCommand extends Command {
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
 		long userID = event.getMessage().getAuthor().get().getId().asLong();
-		List<ReminderBean> reminders = ReminderManager.getInstance().getReminders();
+		List<ReminderBean> reminders = App.reminderManager.getReminders();
 		for (ReminderBean reminder : reminders) {
 			if(reminder.getUserID() == userID){
 				channel.createMessage(reminder.toString()).block();

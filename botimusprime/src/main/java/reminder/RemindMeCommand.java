@@ -9,7 +9,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import util.DateParser;
 
 public class RemindMeCommand extends Command {
-	private static ReminderManager manager = ReminderManager.getInstance();	
+	private static ReminderManager manager = App.reminderManager;	
 	
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
