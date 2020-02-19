@@ -7,7 +7,7 @@ public class ReminderService implements Runnable{
 	private static ReminderService service;
 	private static int UPDATE = 10000;
 	
-	public ReminderService() {
+	private ReminderService() {
 		super();
 	}
 

@@ -17,7 +17,7 @@ public class GameManager {
 	
 	static{
 		gameCategoryIDs.put(167128445631856640L, 679363895810326549L); //Weeb Server
-		gameCategoryIDs.put(456612528571809812L, 679428927575556134L); //Weeb Server
+		gameCategoryIDs.put(456612528571809812L, 679428927575556134L); //Church Server
 	}
 	
 	public static void createGame(Guild guild, String name){
@@ -42,6 +42,12 @@ public class GameManager {
 		}
 		
 		return result;
+	}
+	
+	public static void removeGame(Game game){
+		games.remove(game);
+		MessageChannel channel = game.getChannel();
+		channel.delete().block();
 	}
 	
 	public static List<Game> games(){

@@ -1,7 +1,7 @@
 package app;
 
 import discord4j.core.DiscordClient;
-
+import game.GameService;
 import pso2.EQManager;
 import reminder.ReminderService;
 
@@ -27,6 +27,7 @@ public class App
         
         EQManager.initialize(args[1]);
 	    ReminderService.getInstance();
+	    GameService.getInstance();
 	    
         client.login().block();
     }
