@@ -10,7 +10,6 @@ Needs 2 command line arguments<br>
 - 2nd: Google Calender API Oauth token<br>
 
 TODO:<br>
- - Automatic Removal of inactive games
  - Danbooru image pulling<br>
  - More games<br>
  - Youtube integration (maybe?)<br>
