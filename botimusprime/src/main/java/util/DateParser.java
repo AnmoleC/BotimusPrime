@@ -3,6 +3,7 @@ package util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateParser {
@@ -25,9 +26,14 @@ public class DateParser {
 			Date inputDate = dateformat.parse(input);
 			Date zeroPoint = dateformat.parse("Thursday 00:00");
 			Date now = new Date();
-			now.setHours(0);
-			now.setMinutes(0);
-			now.setSeconds(0);
+
+			Calendar c = Calendar.getInstance();
+			c.setTime(now);
+			c.set(Calendar.HOUR_OF_DAY, 0);
+			c.set(Calendar.MINUTE, 0);
+			c.set(Calendar.SECOND, 0);
+			now = c.getTime();
+
 			Date reminderTime = new Date(inputDate.getTime() - zeroPoint.getTime() + now.getTime());
 			return reminderTime;
 		}else if (input.matches("[\\d]{4}-[\\d]{2}-[\\d]{2}T[\\d]{2}:[\\d]{2}:[\\d]{2}\\+09:00")){
@@ -37,5 +43,11 @@ public class DateParser {
 		}
 
 		throw new ParseException(parseErrMessage, 0);
+	}
+	
+	public static Calendar DateToCalendar(Date date){
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c;
 	}
 }

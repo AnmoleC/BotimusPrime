@@ -1,9 +1,8 @@
-package game.commands;
+package game;
 
 import basicCommands.Command;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.Guild;
-import game.GameManager;
 
 public class CreateGameCommand extends Command {
 

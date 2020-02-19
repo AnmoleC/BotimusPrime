@@ -17,6 +17,7 @@ public class PSO2SubCommands extends Command {
 		subCommandSet.add(new EQListSubCommand());
 		subCommandSet.add(new EQNextSubCommand());
 		subCommandSet.add(new EQTodaySubCommand());
+		subCommandSet.add(new EQCurrentListSubCommand());
 				
 		for (Command command : subCommandSet) {
 			subCommands.put(command.prefix(), command);
@@ -27,7 +28,7 @@ public class PSO2SubCommands extends Command {
 	protected void executeCommand(MessageCreateEvent event) {
 //		System.out.println(content);
 		for (final Map.Entry<String, Command> entry : subCommands.entrySet()) {
-			if (content.startsWith(entry.getKey()) & content.matches(entry.getValue().syntaxRegex())) {
+			if (content.startsWith(entry.getKey()) && content.matches(entry.getValue().syntaxRegex())) {
 //				System.out.println(content);
 				if (content.length() <= entry.getValue().prefix().length()){
 					content = "";
@@ -35,6 +36,7 @@ public class PSO2SubCommands extends Command {
 					content = content.substring(entry.getValue().prefix().length()+1);
 				}
 				entry.getValue().execute(event);
+				
 				break;
 			}			
 		}

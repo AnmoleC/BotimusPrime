@@ -1,5 +1,6 @@
 package pso2.Subcommands;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +21,13 @@ public class EQTodaySubCommand extends Command {
 		List<EQBean> EQlist = EQManager.getAllEQs();
 		channel.createMessage("Listing all EQS on schedule").block();
 		Date endOfToday = new Date();
-		endOfToday.setDate(endOfToday.getDate() + 1);
-		endOfToday.setHours(0);
-		endOfToday.setMinutes(0);
-		endOfToday.setSeconds(0);
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DAY_OF_MONTH, 1);
+		c.set(Calendar.HOUR, 0);
+		c.set(Calendar.MINUTE, 0);
+		c.set(Calendar.SECOND, 0);
+		endOfToday = c.getTime();
+		
 		for (EQBean eqBean : EQlist) {
 			if (eqBean.getStartTime().getTime() < endOfToday.getTime()){
 				channel.createMessage(eqBean.toString() + "\n").block();

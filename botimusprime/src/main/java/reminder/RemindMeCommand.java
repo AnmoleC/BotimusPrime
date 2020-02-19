@@ -9,19 +9,18 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import util.DateParser;
 
 public class RemindMeCommand extends Command {
-	private static ReminderManager manager = App.reminderManager;	
 	
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
 		long username = event.getMessage().getAuthor().get().getId().asLong();
 		String time = content.substring(content.indexOf('<')+1, content.indexOf('>'));
 		String message = content.substring(content.indexOf('>')+1).trim();
-		
+				
 		try{
 			Date reminderTime = DateParser.parse(time);
 			if(reminderTime != null){
 				ReminderBean reminder = new ReminderBean(channel, username, reminderTime, message);
-				manager.addReminder(reminder);
+				ReminderManager.addReminder(reminder);
 				channel.createMessage("Reminder created for " + reminderTime).block();
 			}
 		}catch (ParseException e) {

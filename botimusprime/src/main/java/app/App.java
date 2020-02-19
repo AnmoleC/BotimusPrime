@@ -3,13 +3,11 @@ package app;
 import discord4j.core.DiscordClient;
 
 import pso2.EQManager;
-import reminder.ReminderManager;
 import reminder.ReminderService;
 
 public class App 
 {
 	public static Bot bot;
-	public static ReminderManager reminderManager = new ReminderManager();
 	public static void main( String[] args )
     {	
         System.out.println( "Hello World!" );

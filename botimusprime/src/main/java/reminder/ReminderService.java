@@ -3,11 +3,8 @@ package reminder;
 import java.util.Date;
 import java.util.List;
 
-import app.App;
-
 public class ReminderService implements Runnable{
 	private static ReminderService service;
-	private static ReminderManager manager;
 	private static int UPDATE = 10000;
 	
 	public ReminderService() {
@@ -16,7 +13,6 @@ public class ReminderService implements Runnable{
 
 	public static ReminderService getInstance(){
 		if (service == null){
-			manager = App.reminderManager;
 			service = new ReminderService();
 			Thread thread = new Thread(service);
 			thread.start();
@@ -27,13 +23,13 @@ public class ReminderService implements Runnable{
 	public void run() {
 		List<ReminderBean> reminders;
 		while(true){
-			reminders = manager.getReminders();
+			reminders = ReminderManager.getReminders();
 //			System.out.println(reminders.size() + " Reminders");
 			Date now = new Date();
 			for (ReminderBean reminder : reminders) {
 //				System.out.println(reminder);
 				if(reminder.getDate().getTime() <= now.getTime())
-					manager.printReminder(reminder);
+					ReminderManager.printReminder(reminder);
 			}
 			try {
 				Thread.sleep(UPDATE);

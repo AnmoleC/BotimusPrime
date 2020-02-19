@@ -14,9 +14,9 @@ import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.util.Snowflake;
+import game.CreateGameCommand;
 import game.Game;
 import game.GameManager;
-import game.commands.CreateGameCommand;
 import image.AddImageCommand;
 import image.PostImageCommand;
 import pso2.Subcommands.PSO2SubCommands;
@@ -63,6 +63,7 @@ public class Bot {
 	        .subscribe(event -> {
 	            final String content = event.getMessage().getContent().orElse("");
 	            
+	            //Listen to game Channels
 	            List<Game> games = GameManager.games();
 	            for (Game currGame : games) {
 					if( currGame.getChannel().getId().equals(event.getMessage().getChannelId())	
@@ -70,9 +71,9 @@ public class Bot {
 						currGame.execute(event);
 						break;
 					}
-	            	
 	            }
 	            
+	            //Listen for commands
 	            for (final Entry<String, Command> entry : commandMap().entrySet()) {
 	                if (content.startsWith(BOT_PREFIX + entry.getKey())) {
 	                    entry.getValue().execute(event);
