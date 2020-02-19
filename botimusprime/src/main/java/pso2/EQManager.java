@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -30,21 +32,12 @@ public class EQManager {
 	private static Map<String, Long> EQRoles = new HashMap<>();
 	private static long EQChannel = 679691871672467506L;
 	private static List<ReminderBean> EQReminders = new ArrayList<>();
-	
-	static{
-		EQRoles.put("Utterly Profound", 		679688477822025758L);
-		EQRoles.put("Crimson Castle Crusher", 	679688523955175463L);
-		EQRoles.put("Guides of Creation", 		679688556369018951L);
-		EQRoles.put("Perennial Apocalypse", 	679688593282826252L);
-		EQRoles.put("Specter of Destruction", 	679688650518560813L);
-		EQRoles.put("Armada of Demise", 		679688684903333937L);
-	}
-	
+
 	public static void initialize(String API_key){
 		EQRequestBuilder.setKey(API_key);
 		fetchEQData();
 	}
-	
+		
 	private static void fetchEQData(){
 		System.out.println("UPDATED EQ Data");
 		String url = EQRequestBuilder.getURL();
@@ -67,7 +60,19 @@ public class EQManager {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		initEQRoles();
 		createEQReminders();
+	}
+	
+	private static void initEQRoles(){
+		Set<String> EQNames = EQNames();
+		App.bot.client().getGuilds().collectList().block().forEach(guild ->{
+			guild.getRoles().collectList().block().forEach(role -> {
+				if(EQNames.contains(role.getName())){
+					EQRoles.put(role.getName(), role.getId().asLong());
+				}
+			});
+		});
 	}
 	
 	private static void createEQReminders(){
@@ -106,7 +111,6 @@ public class EQManager {
 	
 	public static List<EQBean> getAllEQs(){
 		if(new Date().getTime() - updated.getTime() > cacheDuration){
-			System.out.println(new Date().getTime() - updated.getTime());
 			fetchEQData();
 		}
 		return calendar.getAllEQs();
@@ -114,7 +118,6 @@ public class EQManager {
 	
 	public static List<EQBean> getUpcomingEQs(){
 		if((new Date().getTime() - updated.getTime()) > cacheDuration){
-			System.out.println(new Date().getTime() - updated.getTime());
 			fetchEQData();
 		}
 		return calendar.getUpcomingEQs();
@@ -122,6 +125,14 @@ public class EQManager {
 	
 	public static Map<String, Long> EQRoles(){
 		return new HashMap<String, Long>(EQRoles);
+	}
+	
+	public static Set<String> EQNames(){
+		Set<String> EQNames = new HashSet<>();
+		for (EQBean EQ : getUpcomingEQs()) {
+			EQNames.add(EQ.getName());
+		}
+		return EQNames;
 	}
 	
 }
