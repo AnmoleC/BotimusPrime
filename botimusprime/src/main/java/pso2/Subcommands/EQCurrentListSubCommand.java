@@ -20,14 +20,15 @@ public class EQCurrentListSubCommand extends Command {
 	protected void executeCommand(MessageCreateEvent event) {
 		List<EQBean> EQlist = EQManager.getUpcomingEQs();
 		Set<String> EQNames = new HashSet<>();
-		
+		String message = "These are the events currently on the schedule\n";
 		for (EQBean EQ : EQlist) {
 			EQNames.add(EQ.getName());
 		}
 		
 		for (String string : EQNames) {
-			System.out.println(string);
+			message += string + "\n";
 		}
+		channel.createMessage(message).block();
 	}
 
 	@Override

@@ -18,11 +18,12 @@ public class EQListSubCommand extends Command {
 	protected void executeCommand(MessageCreateEvent event) {
 		List<EQBean> EQlist = EQManager.getUpcomingEQs();
 		int listLen = Math.min(EQlist.size(), maxMsg);
-		channel.createMessage("Listing next " + listLen + " EQS on schedule").block();
+		String message = "Listing next " + listLen + " EQS on schedule\n";
 		for (int i=0; i < listLen; i++) {
-			channel.createMessage(EQlist.get(i).toString() + "\n").block();
+			message += EQlist.get(i).toString() + "\n";
 		}
-		channel.createMessage("Finished listing Events\n").block();
+		message += "Finished listing Events\n";
+		channel.createMessage(message).block();
 
 	}
 

@@ -19,7 +19,7 @@ public class EQTodaySubCommand extends Command {
 	@Override
 	protected void executeCommand(MessageCreateEvent event) {
 		List<EQBean> EQlist = EQManager.getAllEQs();
-		channel.createMessage("Listing all EQS on schedule").block();
+		String message = "Listing all EQS on schedule\n";
 		Date endOfToday = new Date();
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DAY_OF_MONTH, 1);
@@ -30,10 +30,11 @@ public class EQTodaySubCommand extends Command {
 		
 		for (EQBean eqBean : EQlist) {
 			if (eqBean.getStartTime().getTime() < endOfToday.getTime()){
-				channel.createMessage(eqBean.toString() + "\n").block();
+				message += eqBean.toString() + "\n";
 			}
 		}
-		channel.createMessage("Finished listing all EQs for today").block();
+		message += "Finished listing all EQs for today";
+		channel.createMessage(message).block();
 	}
 
 	@Override
