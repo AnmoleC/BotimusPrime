@@ -89,14 +89,14 @@ public class EQManager {
 				date = c.getTime();
 				
 				String message = EQ.getName() + " in 30 min";
-				ReminderBean reminder = new ReminderBean(channel, userID, date, message);
+				ReminderBean reminder = new ReminderBean(channel, userID, date, message, true);
 				ReminderManager.addReminder(reminder);
 				EQReminders.add(reminder);
 				System.out.println(reminder);
 				
 				date = EQ.getStartTime();
 				message = EQ.getName() + " starting now";
-				reminder = new ReminderBean(channel, userID, date, message);
+				reminder = new ReminderBean(channel, userID, date, message, true);
 				ReminderManager.addReminder(reminder);
 				EQReminders.add(reminder);
 				System.out.println(reminder);

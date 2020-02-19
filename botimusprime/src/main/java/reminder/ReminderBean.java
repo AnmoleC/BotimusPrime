@@ -9,7 +9,7 @@ public class ReminderBean {
 	private long userID;
 	private String message;
 	private Date date;
-	
+	private boolean isRole;
 	
 	public ReminderBean(MessageChannel channel, long userID, Date date, String message) {
 		super();
@@ -20,6 +20,12 @@ public class ReminderBean {
 		if(this.message == null){
 			this.message = "";
 		}
+		this.isRole = false;
+	}
+	
+	public ReminderBean(MessageChannel channel, long userID, Date date, String message, boolean role) {
+		this(channel, userID, date, message);
+		this.isRole = role;
 	}
 
 	public MessageChannel getChannel() {
@@ -38,6 +44,19 @@ public class ReminderBean {
 		return userID;
 	}
 	
+	public boolean isRole(){
+		return isRole;
+	}
+	
+	public String getMention(){
+		String mention = "<@";
+		if(isRole){
+			mention += "&";
+		}
+		mention += userID + ">";
+		
+		return mention;
+	}
 	public String toLongString() {
 		return "ReminderBean [channel=" + channel.getId() + ", message=" + message + ", date=" + date + "]";
 	}

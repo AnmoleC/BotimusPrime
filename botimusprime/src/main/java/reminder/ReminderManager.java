@@ -17,7 +17,8 @@ public class ReminderManager {
 	public static void printReminder(ReminderBean r){
 		if(!reminders.contains(r)) 
 			return;
-		r.getChannel().createMessage("<@" + r.getUserID() + ">\n" + r.getMessage()).block();
+		
+		r.getChannel().createMessage(r.getMention() + "\n" + r.getMessage()).block();
 		reminders.remove(r);
 	}
 	
