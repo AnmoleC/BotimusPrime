@@ -27,6 +27,7 @@ public class Bot {
 	public final char BOT_PREFIX = '!';
 	private final List<Command> commandList = new ArrayList<>();
 	private final Map<String, Command> commandMap = new LinkedHashMap<>();
+	private final long DMChannelID = 677601132176211989L;
 
 	private DiscordClient client;
 	private Snowflake userID;
@@ -56,7 +57,7 @@ public class Bot {
 	}
 	
 	private void listeners(){
-		 client.getEventDispatcher().on(MessageCreateEvent.class)
+		 client.getEventDispatcher().on(MessageCreateEvent.class).filter(event -> (!event.getMessage().getChannelId().equals(Snowflake.of(DMChannelID))))
 	        // subscribe is like block, in that it will *request* for action
 	        // to be done, but instead of blocking the thread, waiting for it
 	        // to finish, it will just execute the results asynchronously.
