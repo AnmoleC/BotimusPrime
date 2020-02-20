@@ -23,7 +23,6 @@ public class DanbooruManager {
 				HttpEntity entity = response.getEntity();
 				if (entity != null){
 					String json = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-					
 					result = new DanbooruResultBean(json);
 					return result;
 				}

@@ -24,7 +24,10 @@ public class DanbooruResultBean {
 			postJO = (JSONObject) itr.next();
 			current++;
 		}
-		
+		if(postJO == null){
+			return null;
+		}
+			
 		DanbooruPostBean postBean = null;
 		try {
 			postBean = new DanbooruPostBean(postJO.toJSONString());

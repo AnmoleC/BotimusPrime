@@ -16,11 +16,16 @@ public class DanbooruGetCommand extends Command {
 			tag = content;
 			imgNum = (int) (Math.random()*1000);
 		}
+		System.out.println("Img:" + imgNum);
 		String url = DanbooruRequestBuilder.getURL(tag, imgNum);
+		System.out.println(url);
 		DanbooruResultBean resultSet = DanbooruManager.fetchResults(url);
-		
 		DanbooruPostBean postBean = resultSet.getPost(imgNum%20);
-		channel.createMessage(postBean.getURL()).block();
+		if(postBean != null){
+			channel.createMessage(postBean.getURL()).block();
+		}else{
+			channel.createMessage("Invalid tag or image number").block();
+		}
 	}
 
 	@Override
