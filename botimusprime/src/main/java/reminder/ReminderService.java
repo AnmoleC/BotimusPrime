@@ -6,6 +6,7 @@ import java.util.List;
 public class ReminderService implements Runnable{
 	private static ReminderService service;
 	private static int UPDATE = 10000;
+	private static boolean running = true;
 	
 	private ReminderService() {
 		super();
@@ -20,9 +21,13 @@ public class ReminderService implements Runnable{
 		return service;
 	}
 	
+	public static void stop(){
+		running = false;
+	}
+	
 	public void run() {
 		List<ReminderBean> reminders;
-		while(true){
+		while(running){
 			reminders = ReminderManager.getReminders();
 //			System.out.println(reminders.size() + " Reminders");
 			Date now = new Date();

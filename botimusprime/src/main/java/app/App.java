@@ -1,9 +1,6 @@
 package app;
 
 import discord4j.core.DiscordClient;
-import game.GameService;
-import pso2.EQManager;
-import reminder.ReminderService;
 
 public class App 
 {
@@ -25,11 +22,14 @@ public class App
         	return;
         final DiscordClient client = bot.client();
         
-        EQManager.initialize(args[1]);
-	    ReminderService.getInstance();
-	    GameService.getInstance();
+        Modules loader = new Modules();
+        loader.setGoogleAPIKey(args[1]);
+        Thread thread = new Thread(loader);
+        thread.start();
 	    
         client.login().block();
+        System.out.println("Logged Out");
+        System.exit(0);
     }
 
 }

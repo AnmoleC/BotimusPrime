@@ -1,4 +1,4 @@
-package game.RockPaperScissor;
+package game.games;
 
 import java.util.Random;
 
@@ -13,8 +13,7 @@ public class RockPaperScissors extends Game {
 	@Override
 	public void subExecute(MessageCreateEvent event) {
 		String message = "";
-		String playerChoice = event.getMessage().getContent().orElse("");
-		int choice = convertMessage(playerChoice);
+		int choice = convertMessage(content);
 		
 		if(choice == 0){
 			channel.createMessage("Invalid choice").block();

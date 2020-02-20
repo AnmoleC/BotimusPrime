@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Map.Entry;
 
 import basicCommands.Command;
 import basicCommands.EchoCommand;
 import basicCommands.HelpCommand;
+import basicCommands.LogoutCommand;
 import basicCommands.PongCommand;
 import danbooru.DanbooruGetCommand;
 import discord4j.core.DiscordClient;
@@ -28,8 +30,7 @@ public class Bot {
 	public final char BOT_PREFIX = '!';
 	private final List<Command> commandList = new ArrayList<>();
 	private final Map<String, Command> commandMap = new LinkedHashMap<>();
-	private final long DMChannelID = 677601132176211989L;
-
+	
 	private DiscordClient client;
 	private Snowflake userID;
 		
@@ -43,6 +44,7 @@ public class Bot {
 	
 	private void initilizeCommands(){
 		commandList.add(new HelpCommand());
+		commandList.add(new LogoutCommand());
 		commandList.add(new PongCommand());
 		commandList.add(new EchoCommand());
 		commandList.add(new PostImageCommand());
@@ -57,9 +59,9 @@ public class Bot {
 			commandMap.put(command.prefix(), command);
 		}
 	}
-	
+
 	private void listeners(){
-		 client.getEventDispatcher().on(MessageCreateEvent.class).filter(event -> (!event.getMessage().getChannelId().equals(Snowflake.of(DMChannelID))))
+		 client.getEventDispatcher().on(MessageCreateEvent.class).filter(event -> (!event.getGuildId().equals(Optional.empty())))
 	        // subscribe is like block, in that it will *request* for action
 	        // to be done, but instead of blocking the thread, waiting for it
 	        // to finish, it will just execute the results asynchronously.
@@ -101,5 +103,4 @@ public class Bot {
     public Map<String, Command> commandMap(){
     	return new LinkedHashMap<>(commandMap);
     }
-    
 }

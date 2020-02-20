@@ -6,6 +6,7 @@ import java.util.List;
 public class GameService implements Runnable {
 	private static GameService service;
 	private static int UPDATE = 30000;
+	private static boolean running = true;
 	
 	private GameService(){
 		super();
@@ -20,13 +21,17 @@ public class GameService implements Runnable {
 		return service;
 	}
 	
+	public static void stop(){
+		running = false;
+	}
+	
 	public void run(){
 		List<Game> games;
-		while(true){
+		while(running){
 			games = GameManager.games();
 			for (Game game : games) {
 				Date now = new Date();
-				if(game.updated().getTime() <= now.getTime()){
+				if(game.updated().getTime() + game.timeout() <= now.getTime()){
 					GameManager.removeGame(game);
 				}
 			}
