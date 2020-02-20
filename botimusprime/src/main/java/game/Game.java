@@ -8,6 +8,7 @@ import discord4j.core.object.entity.MessageChannel;
 public abstract class Game {
 	protected MessageChannel channel;
 	private Date updated;
+	protected String content;
 	
 	public Game(){
 		updated = new Date();
@@ -15,6 +16,7 @@ public abstract class Game {
 	
 	public void execute(MessageCreateEvent event){
 		updated = new Date();
+		content = event.getMessage().getContent().orElse("");
 		subExecute(event);	
 	}
 	public abstract void subExecute(MessageCreateEvent event);

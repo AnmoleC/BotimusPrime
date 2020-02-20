@@ -8,7 +8,8 @@ import java.util.Map;
 import discord4j.core.object.entity.Guild;
 import discord4j.core.object.entity.MessageChannel;
 import discord4j.core.object.util.Snowflake;
-import game.RockPaperScissor.RockPaperScissors;
+import game.games.HangMan;
+import game.games.RockPaperScissors;
 
 public class GameManager {
 	private static Map<Long, Long> gameCategoryIDs = new HashMap<>();
@@ -38,6 +39,10 @@ public class GameManager {
 		switch (name) {
 		case "RPC":
 			result = new RockPaperScissors();
+			break;
+			
+		case "hangman":
+			result = new HangMan();
 			break;
 		}
 		

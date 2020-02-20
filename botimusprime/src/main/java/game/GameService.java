@@ -26,7 +26,7 @@ public class GameService implements Runnable {
 			games = GameManager.games();
 			for (Game game : games) {
 				Date now = new Date();
-				if(game.updated().getTime() <= now.getTime()){
+				if(game.updated().getTime() + game.timeout() <= now.getTime()){
 					GameManager.removeGame(game);
 				}
 			}

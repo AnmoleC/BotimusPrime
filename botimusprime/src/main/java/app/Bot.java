@@ -29,8 +29,7 @@ public class Bot {
 	public final char BOT_PREFIX = '!';
 	private final List<Command> commandList = new ArrayList<>();
 	private final Map<String, Command> commandMap = new LinkedHashMap<>();
-	private final long DMChannelID = 677601132176211989L;
-
+	
 	private DiscordClient client;
 	private Snowflake userID;
 		
@@ -102,5 +101,4 @@ public class Bot {
     public Map<String, Command> commandMap(){
     	return new LinkedHashMap<>(commandMap);
     }
-    
 }
