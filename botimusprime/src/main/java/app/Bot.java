@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Map.Entry;
 
 import basicCommands.Command;
@@ -57,9 +58,9 @@ public class Bot {
 			commandMap.put(command.prefix(), command);
 		}
 	}
-	
+
 	private void listeners(){
-		 client.getEventDispatcher().on(MessageCreateEvent.class).filter(event -> (!event.getMessage().getChannelId().equals(Snowflake.of(DMChannelID))))
+		 client.getEventDispatcher().on(MessageCreateEvent.class).filter(event -> (!event.getGuildId().equals(Optional.empty())))
 	        // subscribe is like block, in that it will *request* for action
 	        // to be done, but instead of blocking the thread, waiting for it
 	        // to finish, it will just execute the results asynchronously.
