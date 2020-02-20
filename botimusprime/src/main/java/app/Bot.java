@@ -10,6 +10,7 @@ import basicCommands.Command;
 import basicCommands.EchoCommand;
 import basicCommands.HelpCommand;
 import basicCommands.PongCommand;
+import danbooru.DanbooruGetCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
 import discord4j.core.event.domain.message.MessageCreateEvent;
@@ -50,6 +51,7 @@ public class Bot {
 		commandList.add(new CheckRemindersCommand());
 		commandList.add(new PSO2SubCommands());
 		commandList.add(new CreateGameCommand());
+		commandList.add(new DanbooruGetCommand());		
 		
 		for (Command command : commandList) {
 			commandMap.put(command.prefix(), command);
