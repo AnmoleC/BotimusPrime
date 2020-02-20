@@ -11,6 +11,5 @@ Needs 2 command line arguments<br>
 - 2nd: Google Calender API Oauth token<br>
 
 TODO:<br>
- - Checking Danbooru Integration to prevent errors<br>
  - More games<br>
  - Youtube integration (maybe?)<br>
