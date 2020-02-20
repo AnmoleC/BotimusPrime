@@ -22,12 +22,14 @@ public class App
         	return;
         final DiscordClient client = bot.client();
         
-        LoadModules loader = new LoadModules();
+        Modules loader = new Modules();
         loader.setGoogleAPIKey(args[1]);
         Thread thread = new Thread(loader);
         thread.start();
 	    
         client.login().block();
+        System.out.println("Logged Out");
+        System.exit(0);
     }
 
 }

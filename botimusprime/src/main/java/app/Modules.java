@@ -4,7 +4,7 @@ import game.GameService;
 import pso2.EQManager;
 import reminder.ReminderService;
 
-public class LoadModules implements Runnable {
+public class Modules implements Runnable {
 	private String GoogleAPIKey;
 	
 	public void setGoogleAPIKey(String key){
@@ -21,6 +21,12 @@ public class LoadModules implements Runnable {
 	    ReminderService.getInstance();
 	    GameService.getInstance();
 	    System.out.println("All Modules Loaded");
+	}
+	
+	public static void stop(){
+		ReminderService.stop();
+		GameService.stop();
+		System.out.println("Stopped Services");
 	}
 
 }

@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import basicCommands.Command;
 import basicCommands.EchoCommand;
 import basicCommands.HelpCommand;
+import basicCommands.LogoutCommand;
 import basicCommands.PongCommand;
 import danbooru.DanbooruGetCommand;
 import discord4j.core.DiscordClient;
@@ -43,6 +44,7 @@ public class Bot {
 	
 	private void initilizeCommands(){
 		commandList.add(new HelpCommand());
+		commandList.add(new LogoutCommand());
 		commandList.add(new PongCommand());
 		commandList.add(new EchoCommand());
 		commandList.add(new PostImageCommand());
