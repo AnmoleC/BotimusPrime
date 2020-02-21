@@ -6,6 +6,7 @@ import discord4j.core.event.domain.message.MessageCreateEvent;
 import discord4j.core.object.entity.MessageChannel;
 
 public abstract class Game {
+	public abstract void begin(); 
 	protected MessageChannel channel;
 	private Date updated;
 	protected String content;

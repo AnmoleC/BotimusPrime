@@ -8,12 +8,25 @@ public class HangMan extends Game {
 	private char[] guess;
 	private String mistakes = "";
 	
+	@Override
+	public void begin() {
+		channel.createMessage(guessString()).block();
+	}
+
 	public HangMan(){
 		word = HangmanWordList.getWord().toCharArray();
 		guess = new char[word.length];
 		for (int i = 0; i < word.length; i++) {
 			guess[i] = '*';
 		}
+	}
+	
+	private String guessString(){
+		String guessString = "";
+		for (int i = 0; i < guess.length; i++) {
+			guessString += guess[i];
+		}
+		return guessString;
 	}
 
 	@Override
@@ -43,11 +56,7 @@ public class HangMan extends Game {
 		if(new String(word).equals(new String(guess))){
 			message = "Congratulations! You guessed the word!\n";
 		}
-		String guessString = "";
-		for (int i = 0; i < guess.length; i++) {
-			guessString += guess[i];
-		}
-		channel.createMessage(message + guessString + "\nMistakes: " + mistakes).block();
+		channel.createMessage(message + guessString() + "\nMistakes: " + mistakes).block();
 	}
 
 	@Override

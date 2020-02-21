@@ -11,6 +11,11 @@ public class RockPaperScissors extends Game {
 	private int playerScore = 0;
 	
 	@Override
+	public void begin() {
+		
+	}
+	
+	@Override
 	public void subExecute(MessageCreateEvent event) {
 		String message = "";
 		int choice = convertMessage(content);
