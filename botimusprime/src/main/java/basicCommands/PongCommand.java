@@ -9,7 +9,7 @@ public class PongCommand extends Command{
 	protected void executeCommand(MessageCreateEvent event) {
 		event.getMessage()
 			.getChannel().block()
-			.createMessage("Pong!").block();		
+			.createMessage("Pong!").block();
 	}
 
 	@Override

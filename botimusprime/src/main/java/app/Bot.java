@@ -12,6 +12,7 @@ import basicCommands.EchoCommand;
 import basicCommands.HelpCommand;
 import basicCommands.LogoutCommand;
 import basicCommands.PongCommand;
+import basicCommands.Times;
 import danbooru.DanbooruGetCommand;
 import discord4j.core.DiscordClient;
 import discord4j.core.DiscordClientBuilder;
@@ -47,13 +48,14 @@ public class Bot {
 		commandList.add(new LogoutCommand());
 		commandList.add(new PongCommand());
 		commandList.add(new EchoCommand());
+		commandList.add(new Times());
 		commandList.add(new PostImageCommand());
 		commandList.add(new AddImageCommand());
 		commandList.add(new RemindMeCommand());
 		commandList.add(new CheckRemindersCommand());
 		commandList.add(new PSO2SubCommands());
 		commandList.add(new CreateGameCommand());
-		commandList.add(new DanbooruGetCommand());		
+		commandList.add(new DanbooruGetCommand());
 		
 		for (Command command : commandList) {
 			commandMap.put(command.prefix(), command);
